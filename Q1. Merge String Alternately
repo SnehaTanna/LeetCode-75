@@ -1,0 +1,43 @@
+Question -> https://leetcode.com/problems/merge-strings-alternately/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        // // The use of += for string concatenation inside the loops causes the time complexity to be quadratic,
+        // // O((word1.length() + word2.length())^2). 
+        // // This is because each concatenation creates a new string, leading to repeated copying of characters.
+        // String ans = "";
+        // int i = 0, j = 0;
+        // while(i < word1.length() && j < word2.length()){
+        //     ans += word1.charAt(i++);
+        //     ans += word2.charAt(j++);
+        // }
+        // while(i < word1.length()){
+        //     ans += word1.charAt(i++);
+        // }
+        // while(j < word2.length()){
+        //     ans += word2.charAt(j++);
+        // }
+        // return ans;
+
+
+        // Using StringBuilder will decrease the Time COmplexity to linear.
+        // O(word1.length() + word2.length())
+
+        StringBuilder merge = new StringBuilder();
+        int i = 0, j = 0;
+        while(i < word1.length() && j < word2.length()){
+            merge.append(word1.charAt(i++));
+            merge.append(word2.charAt(j++));
+        }
+        while(i < word1.length()){
+            merge.append(word1.charAt(i++));
+        }
+        while(j < word2.length()){
+            merge.append(word2.charAt(j++));
+        }
+        return merge.toString();
+        
+    }
+}
