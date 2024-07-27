@@ -1,0 +1,56 @@
+Question -> https://leetcode.com/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder copy = new StringBuilder(s);
+        int i = 0, j = s.length() - 1;
+        while(i <= j){
+            if(isVowel(copy.charAt(i)) && isVowel(copy.charAt(j))){
+                char temp = copy.charAt(i);
+                copy.setCharAt(i, copy.charAt(j));
+                copy.setCharAt(j, temp);
+                i++;
+                j--;
+            }
+            else if(isVowel(copy.charAt(i)) && !isVowel(copy.charAt(j))){
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        return copy.toString();
+    }
+    private boolean isVowel(char ch){
+        if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+            return true;
+        }
+        return false;
+    }
+    // Time Complexity = O(n)
+
+    // We can use Set for Storing vowels, it doesn't affect the TC and SC, but for better readability and slight performance enhancement  
+
+    // private static final Set<Character> VOWELS = new HashSet<>();
+
+    // static {
+    //     VOWELS.add('a');
+    //     VOWELS.add('e');
+    //     VOWELS.add('i');
+    //     VOWELS.add('o');
+    //     VOWELS.add('u');
+    //     VOWELS.add('A');
+    //     VOWELS.add('E');
+    //     VOWELS.add('I');
+    //     VOWELS.add('O');
+    //     VOWELS.add('U');
+    // }
+
+    //  private boolean isVowel(char ch) {
+    //     return VOWELS.contains(ch);
+    // }
+    
+
+}
