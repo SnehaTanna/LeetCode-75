@@ -1,0 +1,22 @@
+Question -> https://leetcode.com/problems/greatest-common-divisor-of-strings/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        // String Concatenation and Comparison: O(m + n)
+        if((str1+str2).equals(str2+str1)){
+            // Substring Operation: O(gcd(m, n)), where gcd(m, n) is the result of the GCD calculation.
+            return str1.substring(0, gcd(str1.length(), str2.length()));
+        }
+        return "";
+    }
+    // GCD Calculation: O(log(min(m, n)))
+    private int gcd(int a, int b){
+        if(b == 0){
+            return a;
+        }
+        return gcd(b, a%b);
+    }
+    // Overall Time Complexity = O(m+n)
+}
