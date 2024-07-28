@@ -1,0 +1,61 @@
+Question -> https://leetcode.com/problems/reverse-words-in-a-string/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public String reverseWords(String s) {
+    // //    Using Split() Function
+    //     String words[] = s.split(" "); // O(n) time complexity of this function
+    //     StringBuilder result = new StringBuilder();
+
+    //     for(int i=words.length-1; i>=0; i--){  // O(n) time complexity of this loop
+    //         // Ignoring empty strings to remove extra spaces
+    //         if(words[i].length() == 0){
+    //             continue;
+    //         }
+    //         // to append the first word in result
+    //         else if(result.length() == 0){
+    //             result.append(words[i]);
+    //         }
+    //         // to append a single space and then the second word in result
+    //         else{
+    //             result.append(" ");
+    //             result.append(words[i]);
+    //         }
+    //     }
+    //     return result.toString();
+
+    //     // Overall Time Complexity = O(n)
+
+    // Without using Split() Function
+        int start = s.length()-1, end = 0;
+        StringBuilder result = new StringBuilder();
+
+        while(start >= 0){
+            // Point start at last char of word
+            while(start >= 0 && s.charAt(start) == ' '){
+                start--;
+            }
+            if(start < 0){
+                break;
+            }
+            end = start; 
+            // point start at space before the word
+            while(start >= 0 && s.charAt(start) != ' '){
+                start--;
+            }
+            // append the words in result
+            if(result.length() == 0){
+                result.append(s.substring(start+1, end+1));
+            }
+            else{
+                result.append(" ");
+                result.append(s.substring(start+1, end+1));
+            }
+        }
+        return result.toString();
+
+        // Overall Time Complexity = O(n)
+
+    }
+}
