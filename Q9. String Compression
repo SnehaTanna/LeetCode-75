@@ -1,0 +1,53 @@
+Question -> https://leetcode.com/problems/string-compression/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public int compress(char[] chars) {
+        // // Brute Force Approach: TC = O(n + m), SC = O(n) n = length of chars and m = length of sb
+        // // Counting the occurence of chars 
+        // StringBuilder sb = new StringBuilder();
+        // int i = 0;
+        // while(i<chars.length){
+        //     int j = i;
+        //     while(j<chars.length && chars[i] == chars[j]){
+        //         j++;
+        //     }
+        //     sb.append(chars[i]);
+        //     int len = j - i;
+        //     if(len>1){
+        //         sb.append(len);
+        //     }
+        //     i = j;
+        // }
+
+        // // Modifying the chars[]
+        // for(i=0; i<sb.length(); i++){
+        //     chars[i] = sb.charAt(i);
+        // }
+
+        // return sb.length();
+
+        // Better Approach with constant extra space without using SringBuilder
+        // Here k is the index where we want to update the chars[]
+        int i = 0, j = 0, k = 0;
+        while(i<chars.length){
+            j = i;
+            while(j<chars.length && chars[i] == chars[j]){
+                j++;
+            }
+            chars[k++] = chars[i];
+            int len = j - i;
+            if(len>1){
+                // Converting int into string
+                String l = String.valueOf(len);
+                // converting string into char array because len can be > 10, so we need two indexes to store it
+                for(char s: l.toCharArray()){
+                    chars[k++] = s;
+                }
+            }
+            i = j;
+        }
+        return k;
+    }
+}
