@@ -1,0 +1,19 @@
+Question -> https://leetcode.com/problems/move-zeroes/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        // Best approach without making copy of array
+        // Tc = O(n)
+        int index = 0;
+        for(int num: nums){
+            if(num != 0){
+                nums[index++] = num;
+            }
+        }
+        while(index < nums.length){
+            nums[index++] = 0;
+        }
+    }
+}
