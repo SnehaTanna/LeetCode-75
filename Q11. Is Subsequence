@@ -1,0 +1,20 @@
+Question -> https://leetcode.com/problems/is-subsequence/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        // Easy Approach. TC = O(n), n = length of t
+        // Constant Space Complexity
+        if(s.length() == 0) return true;
+        if(t.length() == 0) return false;
+        int index = 0;
+        for(int i=0; i<t.length(); i++){
+            if(t.charAt(i) == s.charAt(index)){
+                index++;
+                if(index == s.length()) return true;
+            }
+        }
+        return false;
+    }
+}
