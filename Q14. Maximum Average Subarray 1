@@ -1,0 +1,42 @@
+Question -> https://leetcode.com/problems/maximum-average-subarray-i/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        // // Brute Force Approach - TC = O(n * k)
+        // double ans = Integer.MIN_VALUE;
+        // for(int i=0; i<=nums.length-k; i++){
+        //     int sum = 0, j = 0, index = i;
+        //     while(j < k){
+        //         sum += nums[index++];
+        //         j++;
+        //     }
+        //     double avg = (double)sum/k;
+        //     ans = Math.max(avg, ans);
+        // }
+        // return ans;
+
+        // Optimal Approach using Sliding Window Technique
+        // TC = O(n)
+        int n = nums.length;
+        if(n < k){
+            return 0;
+        }
+
+        int sum = 0;
+        // Calculate the sum of 1st K integers
+        for(int i=0; i<k; i++){
+            sum += nums[i];
+        }
+        double maxAvg = (double) sum/k;
+        // Use sliding Window Technique
+        // Calculate sum of new k elements by removing the sum of nums[i-k] ans adding nums[i]
+        for(int i=k; i<n; i++){
+            sum = sum - nums[i-k] + nums[i];
+            double avg = (double) sum/k;
+            maxAvg = Math.max(avg, maxAvg);
+        }
+        return maxAvg;
+    }
+}
