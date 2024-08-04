@@ -1,0 +1,53 @@
+Question -> https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        // // Brute Force Approach
+        // // TC = O(n * k)
+        // int count = 0;
+        // for(int i=0; i<=s.length()-k; i++){
+        //     int vowel = 0, j = 0, index = i;
+        //     while(j < k){
+        //         if(isVowel(s.charAt(index))){
+        //             vowel++;
+        //         }
+        //         j++;
+        //         index++;
+        //     }
+        //     count = Math.max(count, vowel);
+        // }
+        // return count;
+
+        // Optimal Approach using Sliding Window Technique
+        // TC = O(n)
+        if(s.length() < k){
+            return 0;
+        }
+        // Calculating the number of vowels in 1st K elements
+        int ans = 0, count=0;
+        for(int i=0; i<k; i++){
+            if(isVowel(s.charAt(i))){
+                count++;
+            }
+        }
+        ans = count;
+
+        // Calculating the number of vowels in further K elements
+        // and updating the count accordingly
+        for(int i=k; i<s.length(); i++){
+            if(isVowel(s.charAt(i))){
+                count++;
+            }
+            if(isVowel(s.charAt(i-k))){
+                count--;
+            }
+            ans = Math.max(ans, count);
+        }
+        return ans;
+    }
+    private boolean isVowel(char c){
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+}
