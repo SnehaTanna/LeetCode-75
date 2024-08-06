@@ -1,0 +1,52 @@
+Question -> https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public int longestSubarray(int[] nums) {
+        // // Brute Force approach
+        // // TC = O(n^2)
+        // int max = 0;
+
+        // for(int i=0; i<nums.length; i++){
+        //     int currMax = 0, currLen = 0;
+        //     for(int j=0; j<nums.length; j++){
+        //         if(i == j) continue; //skip the current element
+        //         // calculating the max len og subarray with '1'
+        //         if(nums[j] == 1){
+        //              currLen++;
+        //              currMax = Math.max(currMax, currLen);
+        //         }
+        //         else currLen = 0;
+        //     }
+        //     max = Math.max(max, currMax);
+        // }
+        // return max;
+
+        // Optimal approach using sliding window technique
+        // TC - O(n)
+        int left = 0, right = 0, max = 0, count=0;
+        boolean hasZero = false;
+        while(right < nums.length){
+            if(nums[right] == 0){
+                count++;
+                hasZero = true;
+            }
+            while(count > 1){
+                if(nums[left] == 0){
+                    count--;
+                }
+                left++;
+            }
+            // (right - left + 1) is the size of the window with at most one zero
+            // we need to subtract 1 to simulate the deletion of one zero
+            max = Math.max(max, right - left + 1 - 1);
+            right++;
+        }
+        // Edge case - if there is no zero present in nums
+        if(!hasZero){
+            return nums.length-1;
+        }
+        return max;
+    }
+}
