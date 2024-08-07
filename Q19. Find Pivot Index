@@ -1,0 +1,44 @@
+Question -> https://leetcode.com/problems/find-pivot-index/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public int pivotIndex(int[] nums) {
+        // // Simple Approach - TC = O(n), SC = O(n)
+        // int[] prefixSum = new int[nums.length];
+        // int[] suffixSum = new int[nums.length];
+        // prefixSum[0] = 0;
+        // suffixSum[nums.length-1] = 0;
+        // // Calculating prefix sums
+        // for(int i=1; i<nums.length; i++){
+        //     prefixSum[i] = prefixSum[i-1] + nums[i-1];
+        // }
+        // // Calculating suffix sums
+        // for(int i=nums.length-2; i>=0; i--){
+        //     suffixSum[i] = suffixSum[i+1] + nums[i+1];
+        // }
+        // // checking the pivot element
+        // for(int i=0; i<nums.length; i++){
+        //     if(prefixSum[i] == suffixSum[i]){
+        //         return i;
+        //     }
+        // }
+        // return -1;
+
+        // Optimal Approach - TC = O(n), SC = O(1)
+        int prefixSum = 0, totalSum = 0;
+        // calculate totalSum
+        for(int i=0; i<nums.length; i++){
+            totalSum += nums[i];
+        }
+        for(int i=0; i<nums.length; i++){
+            // if prefixSum = suffixSum return that index
+            if(prefixSum == totalSum - prefixSum - nums[i]){
+                return i;
+            }
+            // updating the prefixSum
+            prefixSum += nums[i];
+        }
+        return -1;
+    }
+}
