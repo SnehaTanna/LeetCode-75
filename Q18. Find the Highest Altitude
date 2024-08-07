@@ -1,0 +1,25 @@
+Question -> https://leetcode.com/problems/find-the-highest-altitude/description/?envType=study-plan-v2&envId=leetcode-75
+
+Solution:
+
+class Solution {
+    public int largestAltitude(int[] gain) {
+        // // Simple Approach - TC = O(n), SC = O(n)
+        // int ans = 0;
+        // int[] altitude = new int[gain.length+1];
+        // altitude[0] = 0;
+        // for(int i=1; i<altitude.length; i++){
+        //     altitude[i] = altitude[i-1] + gain[i-1];
+        //     ans = Math.max(ans, altitude[i]);
+        // }
+        // return ans;
+
+        // Effecient Approach TC = O(n), SC = O(1)
+        int maxAltitude = 0, currAltitude = 0;
+        for(int i=0; i<gain.length; i++){
+            currAltitude += gain[i];
+            maxAltitude = Math.max(maxAltitude, currAltitude);
+        }
+        return maxAltitude;
+    }
+}
